@@ -9,8 +9,6 @@ const router = express.Router();
 // @access  Private
 router.get("/", protect, async (req, res) => {
   try {
-    console.log("aa");
-    console.log(req.user.id);
     const cart = await Cart.findOne({ user: req.user.id }).populate(
       "cartItems.product"
     );
