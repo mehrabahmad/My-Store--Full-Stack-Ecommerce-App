@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-6 mt-12">
+    <footer className=" bg-gray-900 text-gray-300 py-6 mt-12">
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
         {/* Left: Brand and Copy */}
         <div className="text-center md:text-left">

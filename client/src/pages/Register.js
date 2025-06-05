@@ -24,12 +24,10 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Register:", formData);
-    //     setError('');
+
     try {
-      const res = await API.post("/auth/register", formData);
-      localStorage.setItem("token", res.data.token);
-      navigate("/");
+      await API.post("/auth/register", formData);
+      navigate("/login");
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
     }

@@ -22,5 +22,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "$schema": "https://json.schemastore.org/package.json"
 }

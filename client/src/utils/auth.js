@@ -11,6 +11,18 @@ export const getUser = () => {
   }
 };
 
+export const getUserInfo = () => {
+  const token = getUserToken();
+  if (!token) return null;
+
+  try {
+    return jwtDecode(token); // returns user object: { _id, name, isAdmin, ... }
+  } catch (error) {
+    console.error("Invalid token:", error);
+    return null;
+  }
+};
+
 export const getUserToken = () => {
   try {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));

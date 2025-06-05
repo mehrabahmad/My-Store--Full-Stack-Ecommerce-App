@@ -9,9 +9,13 @@ import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Products from "./pages/Products";
 import MyOrder from "./pages/MyOrder";
-import Footer from "./pages/Footer";
+import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
+import AdminDashboard from "./pages/adminPages/AdminDashboard";
+import AdminRoute from "./components/admin/AdminRoute";
+import Users from "./pages/adminPages/Users";
+import Orders from "./pages/adminPages/Orders";
 
 function App() {
   return (
@@ -19,6 +23,13 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
+          <Route element={<AdminRoute />}>
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/users" element={<Users />} />
+            <Route path="/admin/products" element={<Products />} />
+            <Route path="/admin/orders" element={<Orders />} />
+          </Route>
+
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/products" element={<Products />} />

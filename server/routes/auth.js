@@ -1,25 +1,25 @@
-import express from 'express';
-import User from '../models/User.js';
-import jwt from 'jsonwebtoken';
+import express from "express";
+import User from "../models/User.js";
+import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
 // JWT helper
 const generateToken = (user) => {
   return jwt.sign(
-    { id: user._id, name: user.name, email: user.email },
-    'secretjwtkey',
-    { expiresIn: '7d' }
+    { id: user._id, isAdmin: user.isAdmin, name: user.name, email: user.email },
+    "secretjwtkey",
+    { expiresIn: "7d" }
   );
 };
 
-
 // Register
-router.post('/register', async (req, res) => {
+router.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
 
   const userExists = await User.findOne({ email });
-  if (userExists) return res.status(400).json({ message: 'User already exists' });
+  if (userExists)
+    return res.status(400).json({ message: "User already exists" });
 
   const user = await User.create({ name, email, password });
 
@@ -27,23 +27,23 @@ router.post('/register', async (req, res) => {
     _id: user._id,
     name: user.name,
     email: user.email,
-    token: generateToken(user)
+    token: generateToken(user),
   });
 });
 
 // Login
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
   if (!user || !(await user.matchPassword(password)))
-    return res.status(401).json({ message: 'Invalid email or password' });
+    return res.status(401).json({ message: "Invalid email or password" });
 
   res.json({
     _id: user._id,
     name: user.name,
     email: user.email,
-    token: generateToken(user)
+    token: generateToken(user),
   });
 });
 

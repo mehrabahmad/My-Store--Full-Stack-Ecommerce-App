@@ -88,6 +88,18 @@ const Navbar = () => {
         </Link>
 
         {user ? (
+          <>
+            {user.isAdmin && (
+              <Link to="/admin/dashboard" className="hover:underline">
+                Admin Dashboard
+              </Link>
+            )}
+          </>
+        ) : (
+          <></>
+        )}
+
+        {user ? (
           <div
             className="relative"
             onMouseEnter={handleMouseEnter}
