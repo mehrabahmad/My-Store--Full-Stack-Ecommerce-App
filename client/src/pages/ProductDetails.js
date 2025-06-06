@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import { useCart } from "../context/CartContext";
 import { getUser } from "../utils/auth";
+import API from "../api/axios";
 
 const ProductDetail = () => {
   const { id } = useParams(); // get product ID from route
@@ -15,7 +16,8 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const { data } = await axios.get(`/api/products/${id}`);
+        const { data } = await API.get(`/products/${id}`);
+
         setProduct(data);
       } catch (error) {
         console.error("Failed to fetch product:", error);

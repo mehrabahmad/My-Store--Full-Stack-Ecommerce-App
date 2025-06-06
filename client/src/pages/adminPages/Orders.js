@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../../api/axios";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -7,10 +7,9 @@ const Orders = () => {
   const fetchOrders = async () => {
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.get("/api/admin/orders", {
+      const { data } = await API.get("/admin/orders", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log(data);
       setOrders(data);
     } catch (error) {
       console.error("Failed to fetch orders:", error);
@@ -20,7 +19,7 @@ const Orders = () => {
   const updateStatus = async (orderId, newStatus) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(
+      await API.put(
         `/api/admin/orders/${orderId}`,
         { status: newStatus },
         {

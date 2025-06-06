@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const ProductSlider = ({ products }) => {
   // Only show first 5 products
-  const limitedProducts = products.slice(0, 5);
+  const limitedProducts = products.slice(0, 6);
 
   return (
     <div className="w-full max-w-2xl mx-auto">

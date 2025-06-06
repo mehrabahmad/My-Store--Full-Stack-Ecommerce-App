@@ -2,8 +2,8 @@ import axios from "axios";
 
 const API = axios.create({
   // baseURL: 'http://localhost:5000/api', // your backend
-  // baseURL: "https://my-store-backend-uigw.onrender.com/api", // your backend
-  baseURL: process.env.baseURL,
+  baseURL: "https://my-store-backend-uigw.onrender.com/api", // your backend
+  // baseURL: process.env.baseURL,
 });
 
 // Set token in headers if exists

@@ -1,7 +1,8 @@
 import { useCart } from "../context/CartContext";
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API from "../api/axios";
 
 export default function CartPage() {
   const { cartItems, fetchCart, updateCartItem, removeFromCart, loading } =
@@ -38,8 +39,8 @@ export default function CartPage() {
         // quantity: item.quantity,
       }));
 
-      const { data } = await axios.post(
-        "/api/orders",
+      const { data } = await API.post(
+        "/orders",
         { orderItems, totalPrice, address },
         {
           headers: {

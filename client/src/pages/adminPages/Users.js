@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../../api/axios";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -7,7 +7,7 @@ const Users = () => {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.get("/api/admin/users", {
+      const { data } = await API.get("/admin/users", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(data);

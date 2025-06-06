@@ -2,14 +2,16 @@
 // import API from "../api/axios";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import ProductSlider from "../components/ProductSlicer";
+import API from "../api/axios";
 
 function Home() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/products").then((res) => setProducts(res.data));
+    // axios.get("/api/products").then((res) => setProducts(res.data));
+    API.get("/products").then((res) => setProducts(res.data));
   }, []);
 
   return (

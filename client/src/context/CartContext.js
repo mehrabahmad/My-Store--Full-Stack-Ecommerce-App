@@ -5,8 +5,9 @@ import {
   useState,
   useCallback,
 } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { getUserToken } from "../utils/auth";
+import API from "../api/axios";
 
 const CartContext = createContext();
 
@@ -17,12 +18,13 @@ export const CartProvider = ({ children }) => {
   const fetchCart = useCallback(async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get("/api/cart", {
+      // const { data } = await axios.get("/api/cart", {
+      const { data } = await API.get("/cart", {
         headers: {
           Authorization: `Bearer ${getUserToken()}`,
         },
       });
-      setCartItems(Array.isArray(data.cartItems) ? data.cartItems : []);
+      setCartItems(Array.isArray(data?.cartItems) ? data.cartItems : []);
     } catch (error) {
       console.error("Error fetching cart:", error);
       setCartItems([]);
@@ -33,8 +35,8 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (productId, quantity = 1) => {
     try {
-      await axios.post(
-        "/api/cart",
+      await API.post(
+        "/cart",
         { product: productId, quantity },
         {
           headers: { Authorization: `Bearer ${getUserToken()}` },
@@ -47,8 +49,8 @@ export const CartProvider = ({ children }) => {
   };
 
   const updateCartItem = async (cartItemId, quantity) => {
-    await axios.put(
-      `/api/cart/${cartItemId}`,
+    await API.put(
+      `/cart/${cartItemId}`,
       { quantity },
       {
         headers: { Authorization: `Bearer ${getUserToken()}` },
@@ -59,7 +61,7 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = async (productId) => {
     try {
-      await axios.delete(`/api/cart/${productId}`, {
+      await API.delete(`/cart/${productId}`, {
         headers: { Authorization: `Bearer ${getUserToken()}` },
       });
       fetchCart();
